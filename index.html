@@ -41,10 +41,9 @@
     <p class="sub">Button bar tracker</p>
 
     <a id="primary" class="btn primary" href="#"></a>
-    <a id="secondary" class="btn secondary" href="#"></a>
+    <a id="secondary" class="btn secondary" href="#" hidden></a>
 
     <p class="hint">
-      If one link does not open on your network, try the other.<br>
       You will be asked for the team access code.
     </p>
   </main>
@@ -52,12 +51,14 @@
 <script>
   // The only place to edit when the app's address changes.
   const LINKS = {
-    primary:   { label: "Open the tracker",       note: "Direct link", url: "http://3.106.33.233:8100" },
-    secondary: { label: "Open the secure (HTTPS) link", note: "", url: "https://3-106-33-233.sslip.io" },
+    primary:   { label: "Open the tracker", note: "Secure link (HTTPS)", url: "https://3-106-33-233.sslip.io" },
+    secondary: null,   // optional second link: { label: "...", note: "...", url: "..." }
   };
   for (const key of ["primary", "secondary"]) {
     const el = document.getElementById(key), l = LINKS[key];
+    if (!l) continue;
     el.href = l.url;
+    el.hidden = false;
     el.innerHTML = l.label + (l.note ? "<small>" + l.note + "</small>" : "");
   }
 </script>
